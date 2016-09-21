@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pojo.Response;
@@ -23,7 +24,7 @@ public class IndexController extends BaseController {
 	}
 	
 	
-	@RequestMapping(value="/webhook", produces={"application/json"})
+	@RequestMapping(value="/webhook", method = { RequestMethod.POST, RequestMethod.GET }, produces={"application/json"})
     public @ResponseBody Response webhook(HttpServletRequest request, HttpServletResponse response) {
       Response res = new Response();      
       return res;

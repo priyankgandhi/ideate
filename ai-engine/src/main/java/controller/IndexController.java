@@ -40,22 +40,24 @@ public class IndexController extends BaseController {
       StringBuffer jb = new StringBuffer();
       WebhookResponse wr = new WebhookResponse();
       String line = null;
+      System.out.println("Hi there");
       try {
         BufferedReader reader = request.getReader();
         while ((line = reader.readLine()) != null){
             jb.append(line);
         }
+        System.out.println(jb.toString());
           Gson gson = new Gson();
-          AIResponse obj = gson.fromJson(jb.toString(), AIResponse.class);
-          String action = obj.getResult().getAction();
-          System.out.println("action - " + action );
+//          AIResponse obj = gson.fromJson(jb.toString(), AIResponse.class);
+//          String action = obj.getResult().getAction();
+//          System.out.println("action - " + action );
           wr.setSpeech("speech -Response from my AI Server");
           wr.setDisplayText("DisplayText - Response from my AI server");
           Map<String, Object> data = new HashMap<String, Object>();
           data.put("facebook", "this is facebook data from my ai server");
           wr.setData(data);
       } catch (Exception e) {
-    	  e.printStackTrace(); 
+    	  System.err.println(e); 
       }     
       return wr;
     }

@@ -1,8 +1,9 @@
 package controller;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import pojo.CustomData;
-import pojo.Response;
+import pojo.WebhookResponse;
 import service.GeneralService;
+import ai.api.model.AIResponse;
+
+import com.google.gson.Gson;
 
 @Controller
 public class IndexController extends BaseController {
@@ -33,24 +36,28 @@ public class IndexController extends BaseController {
 	
 	
 	@RequestMapping(value="/webhook", method = { RequestMethod.POST, RequestMethod.GET }, produces={"application/json"})
-    public @ResponseBody Response webhook(HttpServletRequest request, HttpServletResponse response) {
-      Response res = new Response();
-      String key = "test";
+    public @ResponseBody WebhookResponse webhook(HttpServletRequest request, HttpServletResponse response) {
       StringBuffer jb = new StringBuffer();
+      WebhookResponse wr = new WebhookResponse();
       String line = null;
       try {
         BufferedReader reader = request.getReader();
-        while ((line = reader.readLine()) != null)
-          jb.append(line);
-      } catch (Exception e) { /*report an error*/ }
-
-      try {
-    	  	System.out.println(jb.toString());
-     } catch (Exception e) {
-    	 System.err.println(e);
-     }      
-      generalService.getValueForKey(key);
-      return res;
+        while ((line = reader.readLine()) != null){
+            jb.append(line);
+        }
+          Gson gson = new Gson();
+          AIResponse obj = gson.fromJson(jb.toString(), AIResponse.class);
+          String action = obj.getResult().getAction();
+          System.out.println("action - " + action );
+          wr.setSpeech("speech -Response from my AI Server");
+          wr.setDisplayText("DisplayText - Response from my AI server");
+          Map<String, Object> data = new HashMap<String, Object>();
+          data.put("facebook", "this is facebook data from my ai server");
+          wr.setData(data);
+      } catch (Exception e) {
+    	  e.printStackTrace(); 
+      }     
+      return wr;
     }
 	
 	

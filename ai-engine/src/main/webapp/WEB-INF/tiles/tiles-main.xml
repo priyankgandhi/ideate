@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC 
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/layout/base/base.jsp">
+		<put-attribute name="title" value="barebones" type="string" />
+		<put-attribute name="pageId" value="" type="string" />
+		<put-attribute name="javascripts" value="/WEB-INF/views/layout/base/javascriptIncludes.jsp" />
+		<put-attribute name="extrajavascripts" value="/WEB-INF/views/pages/empty.jsp" />
+		<put-attribute name="stylesheets" value="/WEB-INF/views/layout/base/stylesheetIncludes.jsp" />
+		<put-attribute name="extrastylesheets" value="/WEB-INF/views/pages/empty.jsp" />
+		<put-attribute name="pageNav" value="/WEB-INF/views/layout/base/pageNav.jsp" />
+		<put-attribute name="header" value="/WEB-INF/views/layout/base/pageHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/pages/empty.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layout/base/pageFooter.jsp" />
+		<put-attribute name="pageJS" value="empty" type="string" />
+	</definition>
+	<definition name="index" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/index/index.jsp" />
+	</definition>
+	<definition name="user/register" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/user/register.jsp" />
+	</definition>
+	<definition name="user/login" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/user/login.jsp" />
+	</definition>
+</tiles-definitions>

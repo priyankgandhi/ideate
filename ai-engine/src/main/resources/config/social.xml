@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:facebook="http://www.springframework.org/schema/social/facebook"
+	xmlns:linkedin="http://www.springframework.org/schema/social/linkedin"
+	xmlns:social="http://www.springframework.org/schema/social"
+	xsi:schemaLocation="http://www.springframework.org/schema/social/facebook http://www.springframework.org/schema/social/spring-social-facebook.xsd
+		http://www.springframework.org/schema/social/linkedin  http://www.springframework.org/schema/social/spring-social-linkedin.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/social/twitter http://www.springframework.org/schema/social/spring-social-twitter.xsd
+		http://www.springframework.org/schema/social http://www.springframework.org/schema/social/spring-social.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<facebook:config app-id="${spring.social.facebook.appId}" app-secret="${spring.social.facebook.appSecret}" app-namespace="socialshowcase" />
+	<linkedin:config app-id="${spring.social.linkedin.appId}" app-secret="${spring.social.linkedin.appSecret}"/>
+	<social:jdbc-connection-repository/>	
+	<bean id="userIdSource" class="org.springframework.social.security.AuthenticationNameUserIdSource" />
+	<bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors" factory-method="noOpText" />
+	<bean class="org.springframework.social.connect.web.ConnectController"/>
+	
+	
+	<bean name="providerSignInController" class="org.springframework.social.connect.web.ProviderSignInController" autowire="constructor">
+		<property name="signUpUrl" value="/user/handleSocialSignup"/>
+		<property name="signInUrl" value="/user/login"/>
+	</bean>
+	
+	<bean id="signInAdapter" class="security.SocialSigninAdapter" autowire="constructor" /> 
+	
+	
+</beans>

@@ -36,7 +36,7 @@
 	<import resource="classpath:config/social.xml" />
 	
 	<bean id="aiUtil" class="util.AIUtil">
-		<property name="apiKey" value="${api.ai.key}" />
+		<property name="apiKey" ref="${api.ai.key}" />
 	</bean>	
 
 	

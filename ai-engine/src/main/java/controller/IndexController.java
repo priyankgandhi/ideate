@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +35,20 @@ public class IndexController extends BaseController {
     public @ResponseBody Response webhook(HttpServletRequest request, HttpServletResponse response) {
       Response res = new Response();
       String key = "";
+      StringBuffer jb = new StringBuffer();
+      String line = null;
+      try {
+        BufferedReader reader = request.getReader();
+        while ((line = reader.readLine()) != null)
+          jb.append(line);
+      } catch (Exception e) { /*report an error*/ }
+
+      try {
+    	  	System.out.println(jb.toString());
+     } catch (Exception e) {
+        // crash and burn
+    	 e.printStackTrace();
+      }      
       generalService.getValueForKey(key);
       return res;
     }

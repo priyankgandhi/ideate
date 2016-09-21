@@ -55,7 +55,12 @@ public class IndexController extends BaseController {
           wr.setDisplayText("DisplayText - Response from my AI server");
           Map<String, Object> data = new HashMap<String, Object>();
           data.put("facebook", "this is facebook data from my ai server");
+          
+          Map<String, Object> context = new HashMap<String, Object>();
+          data.put("facebook", "this is facebook data from my ai server");
+          wr.setContextOut(context);
           wr.setData(data);
+          wr.setSource("aiengine");
       } catch (Exception e) {
     	  System.err.println(e); 
       }     

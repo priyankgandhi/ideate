@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.WebhookResponse;
 import service.GeneralService;
 import ai.api.model.AIResponse;
+
+import com.google.gson.Gson;
 
 @Controller
 public class IndexController extends BaseController {
@@ -44,8 +45,8 @@ public class IndexController extends BaseController {
         while ((line = reader.readLine()) != null){
             jb.append(line);
         }
-          ObjectMapper mapper = new ObjectMapper();
-          AIResponse obj = mapper.readValue(jb.toString(), AIResponse.class);
+          Gson gson = new Gson();
+          AIResponse obj = gson.fromJson(jb.toString(), AIResponse.class);
           String action = obj.getResult().getAction();
           System.out.println("action - " + action );
           wr.setSpeech("speech -Response from my AI Server");

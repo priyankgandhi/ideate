@@ -33,6 +33,7 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>pojo.AuthUser</value>
+				<value>pojo.CustomData</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

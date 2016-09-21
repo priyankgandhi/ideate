@@ -47,12 +47,15 @@ public class IndexController extends BaseController {
           ObjectMapper mapper = new ObjectMapper();
           AIResponse obj = mapper.readValue(jb.toString(), AIResponse.class);
           String action = obj.getResult().getAction();
+          System.out.println("action - " + action );
           wr.setSpeech("speech -Response from my AI Server");
           wr.setDisplayText("DisplayText - Response from my AI server");
           Map<String, Object> data = new HashMap<String, Object>();
           data.put("facebook", "this is facebook data from my ai server");
           wr.setData(data);
-      } catch (Exception e) { /*report an error*/ }     
+      } catch (Exception e) {
+    	  e.printStackTrace(); 
+      }     
       return wr;
     }
 	

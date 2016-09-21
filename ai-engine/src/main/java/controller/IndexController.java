@@ -23,8 +23,8 @@ public class IndexController extends BaseController {
 	}
 	
 	
-	@RequestMapping(value="/ngin", produces={"application/json"})
-    public @ResponseBody Response ngin(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value="/webhook", produces={"application/json"})
+    public @ResponseBody Response webhook(HttpServletRequest request, HttpServletResponse response) {
       Response res = new Response();      
       return res;
     }

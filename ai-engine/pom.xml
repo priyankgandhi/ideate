@@ -331,6 +331,13 @@
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-servlets</artifactId>
 			<version>9.2.14.v20151106</version>
-		</dependency>				
+		</dependency>	
+					<!-- https://mvnrepository.com/artifact/ai.api/libai -->
+		<dependency>
+		    <groupId>ai.api</groupId>
+		    <artifactId>libai</artifactId>
+		    <version>1.1.0</version>
+		</dependency>
+		
 	</dependencies>	
 </project>

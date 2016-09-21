@@ -34,6 +34,10 @@
 	<import resource="classpath:config/spring-security.xml" />
 	<import resource="classpath:config/spring-data-hibernate-repositories.xml" />
 	<import resource="classpath:config/social.xml" />
+	
+	<bean id="aiUtil" class="util.AIUtil">
+		<property name="apiKey" ref="${api.ai.key}" />
+	</bean>	
 
 	
 </beans>

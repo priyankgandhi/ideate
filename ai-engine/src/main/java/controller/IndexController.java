@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pojo.CustomData;
 import pojo.Response;
 import service.GeneralService;
 
@@ -32,9 +33,11 @@ public class IndexController extends BaseController {
 	@RequestMapping(value="/webhook", method = { RequestMethod.POST, RequestMethod.GET }, produces={"application/json"})
     public @ResponseBody Response webhook(HttpServletRequest request, HttpServletResponse response) {
       Response res = new Response();
-      String key = "";
-      generalService.getValueForKey(key);
+      String key = "test";
+      CustomData data = generalService.getValueForKey(key);
       return res;
     }
+	
+	
 
 }

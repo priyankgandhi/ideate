@@ -17,17 +17,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import pojo.WebhookRequest;
 import pojo.WebhookResponse;
 import service.GeneralService;
+import util.AIUtil;
 import ai.api.model.AIResponse;
 
 import com.google.gson.Gson;
+
 
 @Controller
 public class IndexController extends BaseController {
 	
 	@Autowired
 	GeneralService generalService;
+	
+	@Autowired
+	AIUtil aiUtil;
 	
 	@RequestMapping("/")
 	public String index(ModelMap model, Principal principal){	   
@@ -48,11 +54,9 @@ public class IndexController extends BaseController {
         while ((line = reader.readLine()) != null){
             jb.append(line);
         }
-        System.out.println(jb.toString());
-          Gson gson = new Gson();
-//          AIResponse obj = gson.fromJson(jb.toString(), AIResponse.class);
-//          String action = obj.getResult().getAction();
-//          System.out.println("action - " + action );
+        WebhookRequest obj = aiUtil.parseAIRequest(jb.toString());
+        String action = obj.getResult().getAction();
+          System.out.println("action - " + action );
           wr.setSpeech("speech -Response from my AI Server");
           wr.setDisplayText("DisplayText - Response from my AI server");
           Map<String, Object> data = new HashMap<String, Object>();

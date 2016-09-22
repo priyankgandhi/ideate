@@ -71,10 +71,14 @@ public class IndexController extends BaseController {
 			HashMap<String, JsonElement> params = obj.getResult().getParameters();			
 			String intentKey = generalService.intentKeyBuilder(intentName, params);
 			CustomData customData = generalService.getValueForKey(intentKey);
-			wr.setSpeech(customData.getValue());
-			if(!StringUtils.isEmpty(customData.getData())) {
-				wr.setData(customData.getData());	
-			}			
+			if (customData != null) {
+				wr.setSpeech(customData.getValue());
+				if(!StringUtils.isEmpty(customData.getData())) {
+					wr.setData(customData.getData());	
+				}			
+			} else {
+				wr.setSpeech("Sorry I am just a day old. I am still learning.");
+			}
 			System.out.println("action - " + action);
 			System.out.println("intent name - " + intentName);
 			wr.setDisplayText("DisplayText - Response from my AI server");

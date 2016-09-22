@@ -76,3 +76,5 @@ create unique index UserConnectionRank on UserConnection(userId, providerId, ran
         add constraint UK_3gfgi02159lrdp5l5fxpf9bdi unique (key);
 
     
+    alter table custom_data 
+        add column data text;

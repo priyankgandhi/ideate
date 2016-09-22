@@ -15,22 +15,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="custom_data")
 public class CustomData extends BaseData {
-	
-	@ManyToOne
-	AuthUser authUser;
 
 	@Column(unique = true)
 	String key;
 	
 	String value;
 
-	public AuthUser getAuthUser() {
-		return authUser;
-	}
-
-	public void setAuthUser(AuthUser authUser) {
-		this.authUser = authUser;
-	}
 
 	public String getKey() {
 		return key;

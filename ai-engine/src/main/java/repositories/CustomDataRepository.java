@@ -9,6 +9,5 @@ public interface CustomDataRepository extends BaseRepository<CustomData, Long> {
 	
 	public CustomData findByKey(String key);
 
-    public List<CustomData> findByAuthUser(AuthUser authUser);
 
 }

@@ -18,6 +18,9 @@
 	<definition name="index" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/index/index.jsp" />
 	</definition>
+	<definition name="intents" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/index/intents.jsp" />
+	</definition>	
 	<definition name="user/register" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/user/register.jsp" />
 	</definition>

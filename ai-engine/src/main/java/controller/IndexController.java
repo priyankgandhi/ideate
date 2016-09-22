@@ -70,7 +70,7 @@ public class IndexController extends BaseController {
           contextList.add(contextMap1);
           
           data.put("facebook", "this is facebook data from my ai server");
-          wr.setContextOut(contextList);
+//          wr.setContextOut(contextList);
           wr.setData(data);
           wr.setSource("aiengine");
 //          Gson gson2 = new Gson();

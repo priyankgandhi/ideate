@@ -56,7 +56,7 @@ public class GeneralService {
 				sb.append("-").append(val);	
 			}			
 		}
-		ret = sb.toString().toLowerCase();
+		ret = sb.toString().toLowerCase().replaceAll(" ", "");
 		System.out.println("Intent Key - " + ret);
 		return ret;
 	}

@@ -29,6 +29,7 @@ import util.AIUtil;
 import ai.api.model.AIResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 
 import exception.UserRegistrationException;
 
@@ -63,9 +64,13 @@ public class IndexController extends BaseController {
 			System.out.println(jb.toString());
 			WebhookRequest obj = aiUtil.parseAIRequest(jb.toString());
 			String action = obj.getResult().getAction();
+			
 			String intentName = obj.getResult().getMetadata().getIntentName();
 			System.out.println("intentName - "+ intentName);
-			wr.setSpeech(generalService.getValueForKey(intentName).getValue());
+			
+			HashMap<String, JsonElement> params = obj.getResult().getParameters();			
+			String intentKey = generalService.intentKeyBuilder(intentName, params);
+			wr.setSpeech(generalService.getValueForKey(intentKey).getValue());
 			System.out.println("action - " + action);
 			System.out.println("intent name - " + intentName);
 			wr.setDisplayText("DisplayText - Response from my AI server");

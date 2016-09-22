@@ -3,10 +3,13 @@
  */
 package service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.google.gson.JsonElement;
 
 import pojo.CustomData;
 import repositories.CustomDataRepository;
@@ -37,4 +40,15 @@ public class GeneralService {
 		customDataRepository.save(customData);
 	}	
 	
+	public String intentKeyBuilder(String intentName, HashMap<String, JsonElement> params) {
+		String ret = "";
+		String city = params.get("city").getAsString();
+		String geocity = params.get("geo-city").getAsString();
+		String airport = params.get("airport_code").getAsString();
+		String merchant = params.get("merchant").getAsString();
+		StringBuffer sb = new StringBuffer();
+		sb.append(intentName+"-").append(city).append(geocity).append(airport).append(merchant);			
+		ret = sb.toString().toLowerCase();
+		return ret;
+	}
 }

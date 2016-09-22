@@ -50,6 +50,25 @@ public class IndexController extends BaseController {
 		return "index";
 	}
 
+	@RequestMapping(value = "/alexa", method = { RequestMethod.POST, RequestMethod.GET }, produces = {
+	"application/json" })
+	public @ResponseBody WebhookResponse alexa(HttpServletRequest request, HttpServletResponse response) {
+		String line = null;
+		StringBuffer jb = new StringBuffer();
+
+		try {
+			BufferedReader reader = request.getReader();			
+			while ((line = reader.readLine()) != null) {
+				jb.append(line);
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+		System.out.println(jb.toString());		
+		return null;
+	}
+	
+	
 	@RequestMapping(value = "/webhook", method = { RequestMethod.POST, RequestMethod.GET }, produces = {
 			"application/json" })
 	public @ResponseBody WebhookResponse webhook(HttpServletRequest request, HttpServletResponse response) {

@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -67,10 +68,13 @@ public class IndexController extends BaseController {
 			
 			String intentName = obj.getResult().getMetadata().getIntentName();
 			System.out.println("intentName - "+ intentName);
-			
 			HashMap<String, JsonElement> params = obj.getResult().getParameters();			
 			String intentKey = generalService.intentKeyBuilder(intentName, params);
-			wr.setSpeech(generalService.getValueForKey(intentKey).getValue());
+			CustomData customData = generalService.getValueForKey(intentKey);
+			wr.setSpeech(customData.getValue());
+			if(!StringUtils.isEmpty(customData.getData())) {
+				wr.setData(customData.getData());	
+			}			
 			System.out.println("action - " + action);
 			System.out.println("intent name - " + intentName);
 			wr.setDisplayText("DisplayText - Response from my AI server");

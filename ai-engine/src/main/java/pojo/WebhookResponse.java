@@ -7,7 +7,7 @@ public class WebhookResponse {
 	
 	String speech;
 	String displayText;
-	Map<String,Object> data;
+	String data;
 	List<Map<String,Object>> contextOut;
 	String source;
 	public String getSpeech() {
@@ -22,12 +22,6 @@ public class WebhookResponse {
 	public void setDisplayText(String displayText) {
 		this.displayText = displayText;
 	}
-	public Map<String, Object> getData() {
-		return data;
-	}
-	public void setData(Map<String, Object> data) {
-		this.data = data;
-	}
 	
 	public List<Map<String, Object>> getContextOut() {
 		return contextOut;
@@ -41,7 +35,11 @@ public class WebhookResponse {
 	public void setSource(String source) {
 		this.source = source;
 	}
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+	}
 	
-	
-
 }

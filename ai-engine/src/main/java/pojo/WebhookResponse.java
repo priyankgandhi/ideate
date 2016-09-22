@@ -1,5 +1,6 @@
 package pojo;
 
+import java.util.List;
 import java.util.Map;
 
 public class WebhookResponse {
@@ -7,7 +8,7 @@ public class WebhookResponse {
 	String speech;
 	String displayText;
 	Map<String,Object> data;
-	Map<String,Object> contextOut;
+	List<Map<String,Object>> contextOut;
 	String source;
 	public String getSpeech() {
 		return speech;
@@ -27,10 +28,11 @@ public class WebhookResponse {
 	public void setData(Map<String, Object> data) {
 		this.data = data;
 	}
-	public Map<String, Object> getContextOut() {
+	
+	public List<Map<String, Object>> getContextOut() {
 		return contextOut;
 	}
-	public void setContextOut(Map<String, Object> contextOut) {
+	public void setContextOut(List<Map<String, Object>> contextOut) {
 		this.contextOut = contextOut;
 	}
 	public String getSource() {

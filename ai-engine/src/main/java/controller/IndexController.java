@@ -2,7 +2,9 @@ package controller;
 
 import java.io.BufferedReader;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,9 +58,11 @@ public class IndexController extends BaseController {
           Map<String, Object> data = new HashMap<String, Object>();
           data.put("facebook", "this is facebook data from my ai server");
           
-          Map<String, Object> context = new HashMap<String, Object>();
+          List<Map<String, Object>> contextList = new ArrayList<Map<String,Object>>();
+//          Map<String, Object> contextMap = new HashMap<String, Object>();
+          contextList.add(data);
           data.put("facebook", "this is facebook data from my ai server");
-          wr.setContextOut(context);
+          wr.setContextOut(contextList);
           wr.setData(data);
           wr.setSource("aiengine");
       } catch (Exception e) {
@@ -66,7 +70,5 @@ public class IndexController extends BaseController {
       }     
       return wr;
     }
-	
-	
 
 }

@@ -64,6 +64,7 @@ public class IndexController extends BaseController {
 			WebhookRequest obj = aiUtil.parseAIRequest(jb.toString());
 			String action = obj.getResult().getAction();
 			String intentName = obj.getResult().getMetadata().getIntentName();
+			System.out.println("intentName - "+ intentName);
 			wr.setSpeech(generalService.getValueForKey(intentName).getValue());
 			System.out.println("action - " + action);
 			System.out.println("intent name - " + intentName);
@@ -75,7 +76,7 @@ public class IndexController extends BaseController {
 			wr.setContextOut(contextList);
 			wr.setSource("facebooker");
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 		}
 		return wr;
 	}

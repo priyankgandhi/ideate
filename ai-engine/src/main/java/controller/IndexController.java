@@ -57,26 +57,30 @@ public class IndexController extends BaseController {
 			WebhookRequest obj = aiUtil.parseAIRequest(jb.toString());
 			String action = obj.getResult().getAction();
 			String intentName = obj.getResult().getMetadata().getIntentName();
+			if(intentName.equals("lost-baggage")){
+				wr.setSpeech(getLostBaggageInfo());
+			}
+			else{
+				wr.setSpeech("speech -Response from my AI Server");
+			}
 			System.out.println("action - " + action);
 			System.out.println("intent name - " + intentName);
-			wr.setSpeech("speech -Response from my AI Server");
 			wr.setDisplayText("DisplayText - Response from my AI server");
 			Map<String, Object> data = new HashMap<String, Object>();
-			// data.put("facebook", "this is facebook data from my ai server");
 
 			List<Map<String, Object>> contextList = new ArrayList<Map<String, Object>>();
-			// Map<String, Object> contextMap = new HashMap<String, Object>();
-			// contextMap.put("name","aiengine");
-			// contextMap.put("lifespan",2);
-			// contextList.add(contextMap);
 			data.put("facebook", "this is facebook data from my ai server");
 			wr.setContextOut(contextList);
-			// wr.setData(data);
 			wr.setSource("facebooker");
 		} catch (Exception e) {
 			System.err.println(e);
 		}
 		return wr;
+	}
+	
+	private String getLostBaggageInfo(){
+		String returnMessage = "You can claim reimbursement up to $100 per day for a maximum of 5 days for the emergency purchase of essential items like toiletries and clothing, when baggage is delayed or misdirected for more than six hours by a common carrier, such as an airline, bus, cruise ship or train, while on covered trip.";
+		return returnMessage;
 	}
 
 }

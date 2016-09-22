@@ -20,7 +20,7 @@ ${intent.key}
 ${intent.value}
 </td>
 <td>
-<form action="/intents" method="POST">
+<form action="/delete" method="POST">
  <input type="hidden" name="intentId" value="${intent.id}"/>
   <button type="submit" class="btn btn-default">Delete</button>
 </form>

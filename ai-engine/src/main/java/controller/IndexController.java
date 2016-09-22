@@ -67,7 +67,7 @@ public class IndexController extends BaseController {
           data.put("facebook", "this is facebook data from my ai server");
           wr.setContextOut(contextList);
           wr.setData(data);
-//          wr.setSource();
+          wr.setSource("facebooker");
       } catch (Exception e) {
     	  System.err.println(e); 
       }     

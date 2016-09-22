@@ -11,6 +11,8 @@ import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.Reprompt;
 import com.amazon.speech.ui.SimpleCard;
 
+import pojo.CustomData;
+
 /**
  * @author priyank
  *
@@ -18,14 +20,15 @@ import com.amazon.speech.ui.SimpleCard;
 @Service
 public class AlexaService  {
 
-	 public SpeechletResponse getWelcomeResponse(IntentRequest request) {
-	        String speechText = "Welcome to the Alexa Skills Kit, you can say hello";
-
+	 public SpeechletResponse getWelcomeResponse(IntentRequest request, CustomData customData) {
+		 	String speechText = "Welcome to the Genie";
+		 	if (customData != null && customData.getValue()!= null) {
+		 		speechText = customData.getValue();
+		 	}
 	        // Create the plain text output.
 	        PlainTextOutputSpeech speech = new PlainTextOutputSpeech();
 	        speech.setText(speechText);
 	        
-
 	        return SpeechletResponse.newTellResponse(speech);
 	    }
 

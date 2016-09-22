@@ -60,10 +60,11 @@ public class IndexController extends BaseController {
 
 	@RequestMapping(value = "/alexa", method = { RequestMethod.POST, RequestMethod.GET }, produces = {
 	"application/json" })
-	public @ResponseBody SpeechletResponse alexa(HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody Object alexa(HttpServletRequest request, HttpServletResponse response) {
 		String line = null;
 		StringBuffer jb = new StringBuffer();
 		SpeechletResponse res = new SpeechletResponse();
+		Object obj = null;
 
 		try {
 			BufferedReader reader = request.getReader();			
@@ -72,12 +73,20 @@ public class IndexController extends BaseController {
 			}
 			
 			IntentRequest req = aiUtil.parseAlexaRequest(jb.toString());
-			res = alexaService.getWelcomeResponse(req);
+			String intentKey = req.getIntent().getName();
+			CustomData customData = generalService.getValueForKey(intentKey);
+//			res = alexaService.getWelcomeResponse(req, customData);
+			String resStr = "{\"version\":\"1.0\",\"response\":{\"outputSpeech\":{\"type\":\"SSML\",\"ssml\":\"<speak> Here's your fact: On Mars, the Sun appears about half the size as it does on Earth. </speak>\"},\"card\":{\"content\":\"On Mars, the Sun appears about half the size as it does on Earth.\",\"title\":\"Space Facts\",\"type\":\"Simple\"},\"shouldEndSession\":true},\"sessionAttributes\":{}}";
+			if(customData!= null && customData.getValue() != null) {
+				resStr = customData.getValue(); 
+			}		
+			Gson gson = new Gson();
+			obj = gson.fromJson(resStr, Object.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
 		System.out.println(jb.toString());		
-		return res;
+		return obj;
 	}
 	
 	

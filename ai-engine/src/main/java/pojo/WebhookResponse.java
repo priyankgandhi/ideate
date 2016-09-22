@@ -7,7 +7,7 @@ public class WebhookResponse {
 	
 	String speech;
 	String displayText;
-	String data;
+	Object data;
 	List<Map<String,Object>> contextOut;
 	String source;
 	public String getSpeech() {
@@ -35,10 +35,10 @@ public class WebhookResponse {
 	public void setSource(String source) {
 		this.source = source;
 	}
-	public String getData() {
+	public Object getData() {
 		return data;
 	}
-	public void setData(String data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 	

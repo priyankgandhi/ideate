@@ -74,7 +74,11 @@ public class IndexController extends BaseController {
 			if (customData != null) {
 				wr.setSpeech(customData.getValue());
 				if(!StringUtils.isEmpty(customData.getData())) {
-					wr.setData(customData.getData());	
+					String jsonDb = customData.getData();
+					Gson gson = new Gson();
+					Object jsonObj = gson.fromJson(jsonDb, Object.class);
+					System.out.println(jsonDb);
+					wr.setData(jsonObj);
 				}			
 			} else {
 				wr.setSpeech("Sorry I am just a day old. I am still learning.");

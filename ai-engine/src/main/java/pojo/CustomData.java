@@ -7,6 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonRawValue;
+
+
 /**
  * @author priyank
  *
@@ -20,6 +23,7 @@ public class CustomData extends BaseData {
 	
 	String value;
 	
+	@JsonRawValue
 	String data;
 
 

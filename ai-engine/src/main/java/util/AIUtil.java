@@ -1,14 +1,18 @@
 package util;
 
-import pojo.WebhookRequest;
+import java.util.Date;
+
+import com.amazon.speech.speechlet.IntentRequest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import ai.api.AIConfiguration;
 import ai.api.AIDataService;
 import ai.api.AIServiceException;
 import ai.api.model.AIRequest;
 import ai.api.model.AIResponse;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import pojo.WebhookRequest;
+import service.JsonDateDeserializer;
 
 public class AIUtil {
 	
@@ -41,5 +45,10 @@ public class AIUtil {
         WebhookRequest obj = gson.fromJson(jsonRequest, WebhookRequest.class);
 	  return obj;
 	}
-
+	
+	public IntentRequest parseAlexaRequest(String jsonRequest){	
+        Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, new JsonDateDeserializer()).create();
+        IntentRequest obj = gson.fromJson(jsonRequest, IntentRequest.class);
+        return obj;
+	}
 }

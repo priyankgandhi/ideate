@@ -30,6 +30,7 @@ import service.GeneralService;
 import util.AIUtil;
 import ai.api.model.AIResponse;
 
+import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.amazon.speech.ui.OutputSpeech;
 import com.amazon.speech.ui.PlainTextOutputSpeech;
@@ -69,7 +70,9 @@ public class IndexController extends BaseController {
 			while ((line = reader.readLine()) != null) {
 				jb.append(line);
 			}
-			res = alexaService.getWelcomeResponse();
+			
+			IntentRequest req = aiUtil.parseAlexaRequest(jb.toString());
+			res = alexaService.getWelcomeResponse(req);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		

@@ -73,9 +73,9 @@ public class IndexController extends BaseController {
           wr.setContextOut(contextList);
           wr.setData(data);
           wr.setSource("aiengine");
-          Gson gson2 = new Gson();
-          gson2.toJson(wr);
-          System.out.println(gson2.toString());
+//          Gson gson2 = new Gson();
+//          gson2.toJson(wr);
+//          System.out.println(gson2.toString());
       } catch (Exception e) {
     	  System.err.println(e); 
       }     

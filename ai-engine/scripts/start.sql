@@ -66,7 +66,6 @@ create unique index UserConnectionRank on UserConnection(userId, providerId, ran
         updated timestamp,
         key text,
         value text,
-        auth_user int4,
         primary key (id)
     );        
 
@@ -76,7 +75,4 @@ create unique index UserConnectionRank on UserConnection(userId, providerId, ran
     alter table custom_data 
         add constraint UK_3gfgi02159lrdp5l5fxpf9bdi unique (key);
 
-    alter table custom_data 
-        add constraint FK_4v5sy9s59aoae79sh9yh78wyr 
-        foreign key (auth_user) 
-        references auth_user;
+    

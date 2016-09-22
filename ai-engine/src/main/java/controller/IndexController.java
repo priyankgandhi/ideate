@@ -64,6 +64,7 @@ public class IndexController extends BaseController {
 			WebhookRequest obj = aiUtil.parseAIRequest(jb.toString());
 			String action = obj.getResult().getAction();
 			String intentName = obj.getResult().getMetadata().getIntentName();
+			System.out.println("intentName - "+ intentName);
 			wr.setSpeech(generalService.getValueForKey(intentName).getValue());
 			wr.setData(generalService.getValueForKey(intentName).getData());
 			System.out.println("action - " + action);

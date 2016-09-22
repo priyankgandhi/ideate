@@ -56,7 +56,9 @@ public class IndexController extends BaseController {
 			System.out.println(jb.toString());
 			WebhookRequest obj = aiUtil.parseAIRequest(jb.toString());
 			String action = obj.getResult().getAction();
+			String intentName = obj.getResult().getMetadata().getIntentName();
 			System.out.println("action - " + action);
+			System.out.println("intent name - " + intentName);
 			wr.setSpeech("speech -Response from my AI Server");
 			wr.setDisplayText("DisplayText - Response from my AI server");
 			Map<String, Object> data = new HashMap<String, Object>();

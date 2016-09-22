@@ -25,10 +25,14 @@ import pojo.AuthUser;
 import pojo.CustomData;
 import pojo.WebhookRequest;
 import pojo.WebhookResponse;
+import service.AlexaService;
 import service.GeneralService;
 import util.AIUtil;
 import ai.api.model.AIResponse;
 
+import com.amazon.speech.speechlet.SpeechletResponse;
+import com.amazon.speech.ui.OutputSpeech;
+import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
@@ -41,6 +45,9 @@ public class IndexController extends BaseController {
 	GeneralService generalService;
 
 	@Autowired
+	AlexaService alexaService;
+	
+	@Autowired
 	AIUtil aiUtil;
 
 	@RequestMapping("/")
@@ -52,20 +59,22 @@ public class IndexController extends BaseController {
 
 	@RequestMapping(value = "/alexa", method = { RequestMethod.POST, RequestMethod.GET }, produces = {
 	"application/json" })
-	public @ResponseBody WebhookResponse alexa(HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody SpeechletResponse alexa(HttpServletRequest request, HttpServletResponse response) {
 		String line = null;
 		StringBuffer jb = new StringBuffer();
+		SpeechletResponse res = new SpeechletResponse();
 
 		try {
 			BufferedReader reader = request.getReader();			
 			while ((line = reader.readLine()) != null) {
 				jb.append(line);
-			}	
+			}
+			res = alexaService.getWelcomeResponse();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
 		System.out.println(jb.toString());		
-		return null;
+		return res;
 	}
 	
 	

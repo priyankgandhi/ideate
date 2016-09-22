@@ -56,7 +56,7 @@ public class IndexController extends BaseController {
           wr.setSpeech("speech -Response from my AI Server");
           wr.setDisplayText("DisplayText - Response from my AI server");
           Map<String, Object> data = new HashMap<String, Object>();
-          data.put("facebook", "this is facebook data from my ai server");
+//          data.put("facebook", "this is facebook data from my ai server");
           
           
           List<Map<String, Object>> contextList = new ArrayList<Map<String,Object>>();
@@ -66,7 +66,7 @@ public class IndexController extends BaseController {
 //          contextList.add(contextMap);          
           data.put("facebook", "this is facebook data from my ai server");
           wr.setContextOut(contextList);
-          wr.setData(data);
+//          wr.setData(data);
           wr.setSource("facebooker");
       } catch (Exception e) {
     	  System.err.println(e); 

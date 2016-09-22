@@ -50,7 +50,8 @@ public class IndexController extends BaseController {
         }
         System.out.println(jb.toString());
           Gson gson = new Gson();
-//          AIResponse obj = gson.fromJson(jb.toString(), AIResponse.class);
+          AIResponse obj = gson.fromJson(jb.toString(), AIResponse.class);
+          
 //          String action = obj.getResult().getAction();
 //          System.out.println("action - " + action );
           wr.setSpeech("speech -Response from my AI Server");

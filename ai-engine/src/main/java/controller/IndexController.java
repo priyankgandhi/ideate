@@ -58,13 +58,24 @@ public class IndexController extends BaseController {
           Map<String, Object> data = new HashMap<String, Object>();
           data.put("facebook", "this is facebook data from my ai server");
           
+          
           List<Map<String, Object>> contextList = new ArrayList<Map<String,Object>>();
-//          Map<String, Object> contextMap = new HashMap<String, Object>();
-          contextList.add(data);
+          Map<String, Object> contextMap = new HashMap<String, Object>();
+          Map<String, Object> contextMap1 = new HashMap<String, Object>();
+          Map<String, Object> contextMap2 = new HashMap<String, Object>();
+          
+          contextMap.put("name","aiengine");          
+          contextMap1.put("lifespan",2);     
+          contextList.add(contextMap);
+          contextList.add(contextMap1);
+          
           data.put("facebook", "this is facebook data from my ai server");
           wr.setContextOut(contextList);
           wr.setData(data);
           wr.setSource("aiengine");
+          Gson gson2 = new Gson();
+          gson2.toJson(wr);
+          System.out.println(gson2.toString());
       } catch (Exception e) {
     	  System.err.println(e); 
       }     

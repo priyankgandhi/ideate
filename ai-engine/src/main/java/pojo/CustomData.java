@@ -20,6 +20,8 @@ public class CustomData extends BaseData {
 	String key;
 	
 	String value;
+	
+	String data;
 
 
 	public String getKey() {
@@ -36,6 +38,15 @@ public class CustomData extends BaseData {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
 	}	
+	
 	
 }

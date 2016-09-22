@@ -65,6 +65,7 @@ public class IndexController extends BaseController {
 			String action = obj.getResult().getAction();
 			String intentName = obj.getResult().getMetadata().getIntentName();
 			wr.setSpeech(generalService.getValueForKey(intentName).getValue());
+			wr.setData(generalService.getValueForKey(intentName).getData());
 			System.out.println("action - " + action);
 			System.out.println("intent name - " + intentName);
 			wr.setDisplayText("DisplayText - Response from my AI server");
@@ -75,7 +76,7 @@ public class IndexController extends BaseController {
 			wr.setContextOut(contextList);
 			wr.setSource("facebooker");
 		} catch (Exception e) {
-			System.err.println(e);
+			e.printStackTrace();
 		}
 		return wr;
 	}

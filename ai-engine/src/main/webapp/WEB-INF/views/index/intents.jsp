@@ -6,7 +6,10 @@
     <input type="text" class="form-control" id="key" name="key" placeholder="Intent Name">
   </div>
   <div class="form-group">
-	<textarea rows="5" cols="100%" name="value" id="value"></textarea>  
+	<textarea rows="5" cols="100%" name="value" id="value" placeholder="Message"></textarea>  
+  </div>
+    <div class="form-group">
+	<textarea rows="5" cols="100%" name="data" id="data" placeholder="Data"></textarea>  
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </form>
@@ -18,6 +21,9 @@ ${intent.key}
 </td>
 <td>
 ${intent.value}
+</td>
+<td>
+${intent.data}
 </td>
 <td>
 <form action="/delete" method="POST">

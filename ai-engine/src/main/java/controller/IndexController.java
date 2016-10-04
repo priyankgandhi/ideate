@@ -111,6 +111,9 @@ public class IndexController extends BaseController {
 			HashMap<String, JsonElement> params = obj.getResult().getParameters();			
 			String intentKey = generalService.intentKeyBuilder(intentName, params);
 			CustomData customData = generalService.getValueForKey(intentKey);
+			if (customData == null) {
+				customData = generalService.getValueForKey("default-message");
+			}
 			if (customData != null) {
 				wr.setSpeech(customData.getValue());
 				if(!StringUtils.isEmpty(customData.getData())) {
@@ -121,7 +124,7 @@ public class IndexController extends BaseController {
 					wr.setData(jsonObj);
 				}			
 			} else {
-				wr.setSpeech("Sorry I am just a day old. I am still learning.");
+				wr.setSpeech("Sorry I am just a week old. I am still learning :)");
 			}
 			System.out.println("action - " + action);
 			System.out.println("intent name - " + intentName);

@@ -1,0 +1,106 @@
+<ion-view view-title="{{navTitle}}">
+  <ion-content>
+    <div ng-repeat="message in messages" ng-class="{other: message.userId != myId}" class="messages chat-{{message.type}}">
+      <div class="message" ng-class="{'slide-right': hideTime, '': !hideTime}">
+
+          <!-- OPENTABLE CARD -->
+          <div class="message-body" ng-if="message.type == 'card' && message.obj.category == 'OpenTable'">
+              <div class="list card">
+                <div class="item item-avatar">
+                  <span class="icon-avatar"><i class="ion-fork"></i></span>
+                  <h2>{{message.obj.restaurant.name}}</h2>
+                  <p>{{message.obj.restaurant.address}}, {{message.obj.restaurant.city}}</p>
+                </div>
+
+                <div class="item item-body">
+                  <img ng-src="{{message.obj.restaurant.image_url}}" class="full-image" >
+                  <p class="fnt-black">{{message.obj.lounge.location}}</p>
+                  <button class="button button-outline button-positive button-block">
+                    Reserve
+                  </button>
+                  <button class="button button-outline button-positive button-block">
+                    Call
+                  </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- LOUNGE CARD -->
+          <div class="message-body" ng-if="message.type == 'card' && !message.obj.gtype" ng-repeat="lounge in message.obj">
+              <div class="list card">
+                <div class="item item-avatar">
+                  <span class="icon-avatar"><i class="ion-wineglass"></i></span>
+                  <h2>{{lounge.name}}</h2>
+                  <p>Terminal 2</p>
+                </div>
+
+                <div class="item item-body">
+                  <ion-slide-box>
+                     <ion-slide ng-repeat="image in lounge.images">
+                         <img ng-src="{{image.url}}" class="full-image" >
+                     </ion-slide>
+                 </ion-slide-box>
+                <p class="fnt-black">{{lounge.location}}</p>
+                <p class="fnt-black"><strong>Hours of Operation:</strong> {{lounge.hours}}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- PRICELESS OFFERS -->
+          <div class="message-body offer" ng-if="message.type == 'card' && message.obj.gtype == 'offers'" ng-repeat="offer in message.obj.data.experiences.details">
+            <div class="list card">
+              <div class="item item-avatar">
+                <span class="icon-avatar"><i class="ion-wand"></i></span>
+                <h2 ng-bind-html="offer.offer_title"></h2>
+                <!-- <p>{{lounge.sub-text}}</p> -->
+              </div>
+
+              <div class="item item-body">
+                <img ng-src="https://www.priceless.com{{offer.tile_image}}" class="full-image" >
+                <p class="fnt-black" ng-bind-html="offer.subtitle"></p>
+                <a href="https://www.priceless.com{{details_url}}" class="button button-outline button-positive button-block">Reserve</a>
+                <div class="powered">powered by Priceless</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- YELP -->
+        <div class="message-body yelp" ng-if="message.type == 'card' && message.obj.gtype == 'yelp'" ng-repeat="place in message.obj.data.businesses">
+          <div class="list card">
+            <div class="item item-avatar">
+              <span class="icon-avatar"><i class="ion-fork"></i></span>
+              <h2>{{place.name}}</h2>
+              <p><img src="{{place.rating_img_url_small}}" /> from {{place.review_count}} reviews</p>
+            </div>
+
+            <div class="item item-body">
+              <img ng-src="{{place.image_url}}" class="full-image" >
+              <p class="fnt-black" ng-bind-html="place.snippet_text"></p>
+              <a href="https://www.priceless.com{{details_url}}" class="button button-outline button-positive button-block">Reserve</a>
+              <div class="powered">powered by Yelp</div>
+          </div>
+        </div>
+      </div>
+
+
+        <!-- TEXT MESSAGE -->
+        <span class="message-body" ng-if="message.type == 'text'">{{message.text}}</span>
+
+
+      </div>
+
+      <div class="time" ng-class="{'slide-right': hideTime, '': !hideTime}">{{message.time}}</div>
+    </div>
+
+<!-- <iframe width="350" height="430" src="https://console.api.ai/api-client/demo/embedded/45ff8acb-07ff-4543-9451-1aaccca98948"></iframe> -->
+  </ion-content>
+  <ion-spinner icon="dots" class="spinner-balanced" ng-if="loading"></ion-spinner>
+  <ion-footer-bar keyboard-attach class="bar-stable item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Type your message" on-return="sendMessage(); closeKeyboard()" ng-model="data.message" on-focus="inputUp()" on-blur="inputDown()" />
+    </label>
+    <button class="button button-clear" ng-click="sendMessage()">
+      <i class="ion-paper-airplane"></i>
+    </button>
+  </ion-footer-bar>
+</ion-view>

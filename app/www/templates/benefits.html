@@ -1,0 +1,44 @@
+<ion-view view-title="Card Benefits">
+  <a href="#/app/chat" id="chat-button"><i class="ion-chatbubble"></i></a>
+  <ion-content>
+    <!-- COVER -->
+    <div class="card-cover">
+    </div>
+
+    <div ng-repeat="benefit in benefitsList" class="list card">
+      <div class="item item-avatar">
+        <span class="icon-avatar"><i class="{{benefit.icon}}"></i></span>
+        <h2>{{benefit.label}}</h2>
+      </div>
+
+      <div class="item item-body">
+        <!-- <img class="full-image" src="{{benefit.img}}"> -->
+        <ion-slide-box>
+           <ion-slide ng-repeat="image in benefit.images">
+               <img ng-src="{{image.url}}" class="full-image" >
+           </ion-slide>
+       </ion-slide-box>
+      <div ng-if="benefit.type == 'LoungeAccess'">
+        <div ng-repeat="lounge in benefit.lounges">
+            <h2>{{lounge.name}}</h2>
+            <p class="fnt-12 fnt-grey">{{lounge.hours}}</p>
+            <p class="fnt-black">{{lounge.location}}</p>
+        </div>
+      </div>
+
+      <p>
+          {{benefit.description}}
+      </p>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+  </ion-content>
+</ion-view>
